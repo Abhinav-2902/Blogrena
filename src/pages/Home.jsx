@@ -1,46 +1,33 @@
-import React, {useEffect, useState} from 'react'
-import appwriteService from "../appwrite/config";
-import {Container, PostCard} from '../components'
+import React from 'react'
+import { Container } from '../components'
 
 function Home() {
-    const [posts, setPosts] = useState([])
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-16 px-4">
+      <Container>
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Website Title */}
+          <h1 className="text-5xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">
+            Welcome to Blogrena
+          </h1>
 
-    useEffect(() => {
-        appwriteService.getPosts().then((posts) => {
-            if (posts) {
-                setPosts(posts.documents)
-            }
-        })
-    }, [])
-  
-    if (posts.length === 0) {
-        return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
-        )
-    }
-    return (
-        <div className='w-full py-8'>
-            <Container>
-                <div className='flex flex-wrap'>
-                    {posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/4'>
-                            <PostCard {...post} />
-                        </div>
-                    ))}
-                </div>
-            </Container>
+          {/* Introductory Description */}
+          <p className="text-gray-600 dark:text-gray-400 text-lg mb-6">
+            Blogrena is a modern platform for sharing your ideas, stories, and insights. 
+            Explore content from writers around the world or create your own post to engage with readers.
+          </p>
+
+          {/* Call to Action */}
+          <a
+            href="/signup"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition"
+          >
+            Get Started
+          </a>
         </div>
-    )
+      </Container>
+    </div>
+  )
 }
 
 export default Home
